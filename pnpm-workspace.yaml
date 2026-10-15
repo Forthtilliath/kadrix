@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - '@forthtilliath/forth-ui@0.4.1'
+  - '@forthtilliath/react-kit@0.6.0'
