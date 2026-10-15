@@ -1,17 +1,16 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { BatchPanel } from "./components/BatchPanel";
 import { ModelsBanner } from "./components/ModelsBanner";
 import { PreviewPane } from "./components/PreviewPane";
 import { SettingsPanel } from "./components/SettingsPanel";
 import { useBatch } from "./hooks/useBatch";
-import { loadSettings, saveSettings, type Settings } from "./lib/settings";
+import { useSettings } from "./lib/settings";
 
 export default function App() {
-  const [settings, setSettings] = useState<Settings>(loadSettings);
+  const [settings, setSettings] = useSettings();
   const [modelsReady, setModelsReady] = useState(false);
   const batch = useBatch();
 
-  useEffect(() => saveSettings(settings), [settings]);
   const onModelsReady = useCallback((ready: boolean) => setModelsReady(ready), []);
 
   const canStart = modelsReady && !!settings.inputDir && !!settings.outputDir;
