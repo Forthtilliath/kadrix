@@ -2,6 +2,7 @@
 name = "kadrix"
 version = "0.1.0"
 description = "Traitement par lot de portraits pour trombinoscope"
+license = "MIT"
 edition = "2021"
 rust-version = "1.85"
 
