@@ -1,6 +1,7 @@
 import { open } from "@tauri-apps/plugin-dialog";
 import type { BackgroundParams, Params, Settings } from "../lib/settings";
-import { ColorField, NumberField, PathField, Section, Segmented, Toggle } from "./ui";
+import { ToggleSwitch } from "@forthtilliath/forth-ui/components/toggle-switch";
+import { ColorField, NumberField, PathField, Section, Segmented } from "./ui";
 
 interface Props {
   settings: Settings;
@@ -72,7 +73,7 @@ export function SettingsPanel({ settings, onChange }: Props) {
       <BackgroundSection value={p.background} onChange={(background) => setParams({ background })} />
 
       <Section title="Luminosité">
-        <Toggle label="Uniformiser la luminosité" checked={p.light.enabled} onChange={(enabled) => setParams({ light: { ...p.light, enabled } })} />
+        <ToggleSwitch label="Uniformiser la luminosité" checked={p.light.enabled} onCheckedChange={(enabled) => setParams({ light: { ...p.light, enabled } })} />
         {p.light.enabled && (
           <>
             <NumberField
@@ -95,18 +96,18 @@ export function SettingsPanel({ settings, onChange }: Props) {
       </Section>
 
       <Section title="Export">
-        <Toggle label="AVIF" checked={p.export.avif} onChange={(avif) => setParams({ export: { ...p.export, avif } })} />
+        <ToggleSwitch label="AVIF" checked={p.export.avif} onCheckedChange={(avif) => setParams({ export: { ...p.export, avif } })} />
         {p.export.avif && (
           <NumberField label="Qualité AVIF" value={p.export.avifQuality} min={1} max={100} onChange={(avifQuality) => setParams({ export: { ...p.export, avifQuality } })} />
         )}
-        <Toggle label="WebP" checked={p.export.webp} onChange={(webp) => setParams({ export: { ...p.export, webp } })} />
+        <ToggleSwitch label="WebP" checked={p.export.webp} onCheckedChange={(webp) => setParams({ export: { ...p.export, webp } })} />
         {p.export.webp && (
           <NumberField label="Qualité WebP" value={p.export.webpQuality} min={1} max={100} onChange={(webpQuality) => setParams({ export: { ...p.export, webpQuality } })} />
         )}
-        <Toggle
+        <ToggleSwitch
           label="PNG détouré (fond transparent)"
           checked={p.export.pngTransparent}
-          onChange={(pngTransparent) => setParams({ export: { ...p.export, pngTransparent } })}
+          onCheckedChange={(pngTransparent) => setParams({ export: { ...p.export, pngTransparent } })}
         />
       </Section>
     </aside>

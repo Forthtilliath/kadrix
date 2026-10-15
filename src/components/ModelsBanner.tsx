@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { downloadModels, errorMessage, modelStatus, type ModelInfo } from "../lib/api";
-import { Button } from "./ui";
+import { Button } from "@forthtilliath/forth-ui/components/button";
 
 const formatSize = (bytes: number) =>
   bytes >= 1e9 ? `${(bytes / 1e9).toFixed(2)} Go` : `${Math.max(1, Math.round(bytes / 1e6))} Mo`;
@@ -57,7 +57,7 @@ export function ModelsBanner({ onReady }: { onReady: (ready: boolean) => void })
       </ul>
       <p className="mt-1 text-xs text-zinc-500">Chaque fichier est vérifié (empreinte SHA-256) avant d'être utilisé.</p>
       <div className="mt-3 flex items-center gap-3">
-        <Button variant="primary" onClick={start} disabled={downloading}>
+        <Button size="sm" onClick={start} loading={downloading}>
           {downloading ? "Téléchargement…" : "Télécharger"}
         </Button>
         {downloading && (
