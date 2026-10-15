@@ -1,3 +1,4 @@
+import { usePersistentState } from "@forthtilliath/react-kit/usePersistentState";
 import { z } from "zod";
 
 const STORAGE_KEY = "kadrix.settings.v1";
@@ -54,22 +55,11 @@ export const DEFAULT_PARAMS: Params = {
 
 export const DEFAULT_SETTINGS: Settings = { inputDir: "", outputDir: "", params: DEFAULT_PARAMS };
 
-/** Données illisibles ou hors bornes : réglages par défaut, rien d'appliqué. */
-export function loadSettings(): Settings {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_SETTINGS;
-    const parsed = settingsSchema.safeParse(JSON.parse(raw));
-    return parsed.success ? parsed.data : DEFAULT_SETTINGS;
-  } catch {
-    return DEFAULT_SETTINGS;
-  }
-}
-
-export function saveSettings(settings: Settings): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-  } catch {
-    // Stockage indisponible : les réglages ne seront simplement pas mémorisés.
-  }
+/**
+ * Réglages mémorisés dans `localStorage`, vérifiés par le schéma à chaque lecture.
+ * Données illisibles ou hors bornes : réglages par défaut, rien d'appliqué.
+ */
+export function useSettings() {
+  const { value, setValue } = usePersistentState(STORAGE_KEY, DEFAULT_SETTINGS, { schema: settingsSchema });
+  return [value, setValue] as const;
 }
