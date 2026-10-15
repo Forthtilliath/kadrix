@@ -1,0 +1,12 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+
+# Modèles ONNX : téléchargés par l'application, jamais commités.
+*.onnx
+
+# Documentation : seuls README et CHANGELOG sont suivis.
+*.md
+!README.md
+!CHANGELOG.md
