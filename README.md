@@ -2,6 +2,19 @@
 
 Application de bureau (Windows) qui traite un dossier de portraits pour obtenir un trombinoscope uniforme, prêt pour le web.
 
+## Installation
+
+1. Télécharger `Kadrix-<version>-setup.exe` depuis la page [Releases](https://github.com/Forthtilliath/kadrix/releases).
+2. Vérifier le fichier : son empreinte doit être identique à celle indiquée dans les notes de la release.
+
+   ```powershell
+   Get-FileHash .\Kadrix-0.1.0-setup.exe -Algorithm SHA256
+   ```
+
+3. Lancer l'installeur. Il n'est pas encore signé : Windows SmartScreen affiche « Windows a protégé votre ordinateur ». Cliquer sur **Informations complémentaires**, puis **Exécuter quand même**, seulement si l'empreinte correspond.
+
+Au premier lancement, l'application propose de télécharger les modèles (environ 1 Go).
+
 ## Pipeline
 
 1. **Détection** du visage et des yeux : YuNet (ONNX), avec une seconde passe sur un recadrage autour du visage pour gagner en précision.
@@ -47,3 +60,7 @@ Les modèles sont téléchargés au premier lancement, depuis l'application (env
 ## RGPD
 
 Publier la photo d'un membre sur le web exige son consentement : à recueillir avant toute mise en ligne.
+
+## Licence
+
+[MIT](LICENSE)
