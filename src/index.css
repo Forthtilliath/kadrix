@@ -1,11 +1,25 @@
-@import "tailwindcss";
+/* Tailwind, variables de thème shadcn et variante `dark:` pilotée par la classe `.dark`. */
+@import "@forthtilliath/shadcn-ui/styles/globals-static.css";
 
-@theme {
-  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
-}
+/*
+ * Composants précompilés de la lib : Tailwind doit y lire les classes utilisées.
+ * Pas de `dist/**\/*.js` ici : avec les liens symboliques de pnpm, ce motif ne trouve rien.
+ */
+@source "../node_modules/@forthtilliath/*/dist";
 
 :root {
   color-scheme: light dark;
+  --font-sans: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  /* Accent de Kadrix (teal) appliqué aux composants de la lib. */
+  --primary: var(--color-teal-600);
+  --primary-foreground: var(--color-white);
+  --ring: var(--color-teal-600);
+}
+
+.dark {
+  --primary: var(--color-teal-500);
+  --primary-foreground: var(--color-zinc-950);
+  --ring: var(--color-teal-500);
 }
 
 body {
