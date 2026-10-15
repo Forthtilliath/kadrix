@@ -2,7 +2,8 @@ import { useState } from "react";
 import type { BatchState } from "../hooks/useBatch";
 import { errorMessage, openOutput, type ItemReport, type ItemStatus } from "../lib/api";
 import { IssueList } from "./IssueList";
-import { Button, Segmented } from "./ui";
+import { Button } from "@forthtilliath/forth-ui/components/button";
+import { Segmented } from "./ui";
 
 interface Props {
   state: BatchState;
@@ -30,11 +31,11 @@ export function BatchPanel({ state, canStart, onStart, onCancel }: Props) {
     <div className="flex max-h-[45%] min-h-48 flex-col gap-3 rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
       <div className="flex flex-wrap items-center gap-3">
         {state.running ? (
-          <Button variant="danger" onClick={onCancel}>
+          <Button variant="destructive" size="sm" onClick={onCancel}>
             Arrêter
           </Button>
         ) : (
-          <Button variant="primary" onClick={onStart} disabled={!canStart}>
+          <Button size="sm" onClick={onStart} disabled={!canStart}>
             Traiter tout le dossier
           </Button>
         )}
@@ -52,7 +53,7 @@ export function BatchPanel({ state, canStart, onStart, onCancel }: Props) {
           </>
         )}
         {state.reportPath && !state.running && (
-          <Button onClick={() => openOutput().catch((e) => setOpenError(errorMessage(e)))}>Ouvrir le dossier de sortie</Button>
+          <Button variant="outline" size="sm" onClick={() => openOutput().catch((e) => setOpenError(errorMessage(e)))}>Ouvrir le dossier de sortie</Button>
         )}
       </div>
 

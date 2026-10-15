@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { baseName, errorMessage, listImages, preview, type PreviewResult } from "../lib/api";
 import type { Params } from "../lib/settings";
 import { IssueList } from "./IssueList";
-import { Button } from "./ui";
+import { Button } from "@forthtilliath/forth-ui/components/button";
 
 interface Props {
   inputDir: string;
@@ -71,7 +71,7 @@ export function PreviewPane({ inputDir, params, modelsReady, busy }: Props) {
         <div className="flex items-center justify-between gap-3">
           <p className="truncate text-sm font-medium">{selected ? baseName(selected) : "Aperçu"}</p>
           {selected && (
-            <Button onClick={() => run(selected)} disabled={disabled}>
+            <Button variant="outline" size="sm" onClick={() => run(selected)} disabled={disabled}>
               Recalculer
             </Button>
           )}
